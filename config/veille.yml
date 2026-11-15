@@ -1,0 +1,67 @@
+# Configuration de la veille. Lue par les trois prompts (weekly, daily, monthly).
+langue_sources: en
+langue_digest: fr
+
+themes:
+  - id: cloud
+    label: Cloud / CaaS / souveraineté
+    poids: 1.0
+    mots_cles: [kubernetes, openshift, sovereign cloud, CaaS, platform engineering, FinOps, eBPF, confidential computing]
+  - id: telco
+    label: Telco / réseaux
+    poids: 1.0
+    mots_cles: [5G SA, Open RAN, network slicing, cloud-native core, 6G, ETSI, 3GPP, O-RAN, edge]
+  - id: hardware
+    label: Hardware / silicium
+    poids: 1.0
+    mots_cles: [GPU, accelerators, RISC-V, chiplets, HBM, CXL, photonics, DPU, SmartNIC, datacenter power]
+  - id: ia_produit
+    label: IA / produit
+    poids: 1.0
+    mots_cles: [LLM inference, agents, product management, evals, on-prem AI, open weights]
+  - id: biotech
+    label: Biotechnologie
+    poids: 0.7
+    mots_cles: [protein design, CRISPR, mRNA, synthetic biology, bioinformatics, lab automation]
+  - id: eco_finance
+    label: Économie / finance
+    poids: 0.8
+    mots_cles: [capex, semiconductor economics, cloud pricing, compute cost, antitrust, industrial policy]
+
+types_sources_acceptes:
+  - preprints: arXiv (cs.DC, cs.NI, cs.AR, cs.OS, cs.AI, q-bio, econ), bioRxiv, SSRN
+  - essais_blogs: blogs d'ingénieurs, essais longs, Substack, newsletters de fond
+  - analyses_eco_fin: analyses économiques et financières de fond (rapports, notes de recherche, 10-K/10-Q commentés)
+  - open_source: releases, KEP/RFC/ADR, discussions de gouvernance, roadmaps (GitHub, CNCF, LF, Apache, OpenInfra)
+  - standards: 3GPP, ETSI, O-RAN Alliance, IETF, CNCF TAG, OCP
+
+# Presse mainstream : jamais comme source (ni comme lien principal).
+domaines_exclus:
+  - nytimes.com
+  - wsj.com
+  - bloomberg.com
+  - reuters.com
+  - ft.com
+  - bbc.com
+  - cnn.com
+  - lemonde.fr
+  - lesechos.fr
+  - lefigaro.fr
+  - forbes.com
+  - businessinsider.com
+  - techcrunch.com
+  - theverge.com
+  - wired.com
+  - zdnet.com
+  - cnbc.com
+  - yahoo.com
+
+# Notation de 0 à 5 par critère. score = moyenne pondérée * poids du thème.
+scoring:
+  criteres:
+    nouveaute: 0.25
+    solidite_source: 0.25
+    impact_pm: 0.30
+    rarete: 0.20
+  signal_faible: "rarete >= 4 ET impact_pm >= 3 ET peu relayé (moins de 3 reprises visibles)"
+  seuil_flash: 3.5
